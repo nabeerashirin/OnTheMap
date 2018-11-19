@@ -19,7 +19,6 @@
 		6FEEE3A12147E411008B8936 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3A02147E411008B8936 /* StudentLocation.swift */; };
 		6FEEE3A32147E415008B8936 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3A22147E415008B8936 /* LocationData.swift */; };
 		6FEEE3A52147E429008B8936 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3A42147E429008B8936 /* ParseClient.swift */; };
-		6FEEE3A72147E42F008B8936 /* ParsingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3A62147E42F008B8936 /* ParsingFunctions.swift */; };
 		6FEEE3A92147E434008B8936 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3A82147E434008B8936 /* Constants.swift */; };
 		6FEEE3AB2147E43A008B8936 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEEE3AA2147E43A008B8936 /* UdacityClient.swift */; };
 		6FEEE3AD2147E474008B8936 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FEEE3AC2147E474008B8936 /* Main.storyboard */; };
@@ -41,7 +40,6 @@
 		6FEEE3A02147E411008B8936 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 		6FEEE3A22147E415008B8936 /* LocationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		6FEEE3A42147E429008B8936 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
-		6FEEE3A62147E42F008B8936 /* ParsingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingFunctions.swift; sourceTree = "<group>"; };
 		6FEEE3A82147E434008B8936 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6FEEE3AA2147E43A008B8936 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		6FEEE3AC2147E474008B8936 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				6FEEE3A42147E429008B8936 /* ParseClient.swift */,
-				6FEEE3A62147E42F008B8936 /* ParsingFunctions.swift */,
 				6FEEE3A82147E434008B8936 /* Constants.swift */,
 			);
 			path = Parse;
@@ -232,7 +229,6 @@
 				6FEEE38E2147E29C008B8936 /* BlackBox.swift in Sources */,
 				6FEEE3A32147E415008B8936 /* LocationData.swift in Sources */,
 				6FEEE39F2147E3EF008B8936 /* ShareLinkViewController.swift in Sources */,
-				6FEEE3A72147E42F008B8936 /* ParsingFunctions.swift in Sources */,
 				6FEEE3AB2147E43A008B8936 /* UdacityClient.swift in Sources */,
 				6FEEE3A52147E429008B8936 /* ParseClient.swift in Sources */,
 			);
