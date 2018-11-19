@@ -85,6 +85,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lBb-5e-h4M" userLabel="Activity Indicator">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.20000000000000001" green="0.0" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="101" translatesAutoresizingMaskIntoConstraints="NO" id="ixc-I2-wra">
                                 <rect key="frame" x="16" y="104" width="343" height="555"/>
                                 <subviews>
@@ -109,7 +113,9 @@
                         <constraints>
                             <constraint firstItem="ixc-I2-wra" firstAttribute="top" secondItem="pmg-Ed-gsb" secondAttribute="bottom" constant="40" id="B9s-0x-H4A"/>
                             <constraint firstItem="NWD-se-5Pb" firstAttribute="top" secondItem="ixc-I2-wra" secondAttribute="bottom" constant="8" symbolic="YES" id="V3D-cT-UuI"/>
+                            <constraint firstItem="lBb-5e-h4M" firstAttribute="centerY" secondItem="ZOm-RA-koZ" secondAttribute="centerY" id="WXH-WQ-lsu"/>
                             <constraint firstItem="ixc-I2-wra" firstAttribute="leading" secondItem="ZOm-RA-koZ" secondAttribute="leadingMargin" id="gDa-9N-qlv"/>
+                            <constraint firstItem="lBb-5e-h4M" firstAttribute="centerX" secondItem="ZOm-RA-koZ" secondAttribute="centerX" id="kHd-rx-3lU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ixc-I2-wra" secondAttribute="trailing" id="kej-Pd-o8G"/>
                         </constraints>
                     </view>
@@ -121,6 +127,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="lBb-5e-h4M" id="ZAb-YO-d2g"/>
                         <outlet property="setNewLocationTextField" destination="Wvg-RX-kX1" id="jnL-C5-Zct"/>
                     </connections>
                 </viewController>

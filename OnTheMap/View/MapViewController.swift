@@ -10,11 +10,9 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
-    
-    // MARK: Outlets
+
     @IBOutlet weak var studentLocationsMapView: MKMapView!
     
-    // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,8 +22,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Make annotations using Student locations data and add them to the MapView
+
         var annotations = [MKPointAnnotation]()
         for studentLocation in LocationData.sharedInstance.studentLocations {
             let latitude = CLLocationDegrees(studentLocation.latitude)
@@ -40,8 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotations.append(studentLocationAnnotation)
         }
         studentLocationsMapView.addAnnotations(annotations)
-        
-        // Center map on user's current location
+
         var myCoordinates = CLLocationCoordinate2D(latitude: ParseClient.MapViewConstants.defaultLatitude, longitude: ParseClient.MapViewConstants.defaultLongitude)
         if let myLocation = LocationData.sharedInstance.myLocation {
             myCoordinates = CLLocationCoordinate2D(latitude: myLocation.latitude, longitude: myLocation.longitude)
@@ -49,9 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let region = MKCoordinateRegionMakeWithDistance(myCoordinates, ParseClient.MapViewConstants.mapViewLargeScale, ParseClient.MapViewConstants.mapViewLargeScale)
         studentLocationsMapView.setRegion(region, animated: true)
     }
-    
-    // MARK: MKMapViewDelegate functions
-    // Setup a location pin
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         var locationPinView = mapView.dequeueReusableAnnotationView(withIdentifier: ParseClient.MapViewConstants.pinReusableIdentifier)
         
@@ -69,15 +63,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             
-            // Fing out which StudentLocation is selected
+ 
             var selectedStudentLocation: StudentLocation? = nil
             for location in LocationData.sharedInstance.studentLocations {
                 if (location.latitude == view.annotation?.coordinate.latitude) && (location.longitude == view.annotation?.coordinate.longitude) {
                     selectedStudentLocation = location
                 }
             }
-            
-            // Ensure that a selected location is found, show an alert otherwise
+   
             guard let selectedLocation = selectedStudentLocation else {
                 showAlert(viewController: self, title: "ERROR", message: "BAD location!", actionTitle: "Dismiss")
                 return

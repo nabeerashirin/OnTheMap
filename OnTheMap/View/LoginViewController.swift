@@ -49,7 +49,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
     @IBAction private func login(_ sender: UIButton) {
         
         
-        // Start LOGIN process
+      
         UdacityClient.sharedInstance().getSessionID(userName: emailTextField.text!, password: passwordTextField.text!, loginVC: self, completionHandlerForLogin: {(success, error) in
             if success {
                 UdacityClient.sharedInstance().getUserDetails(completionHandlerForUserDetails: {(success, error) in
@@ -57,20 +57,16 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
                         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
                             if success {
                                 performUIUpdatesOnMain {
-                                    self.completeLogin() // Proceed with the next scene
+                                    self.completeLogin()
                                 }
                             } else {
                                 performUIUpdatesOnMain {
-                                    
-                                    // Alert: Download of all Student Locations failed
                                     showAlert(viewController: self, title: "ERROR", message: error?.localizedDescription, actionTitle: "Dismiss")
                                 }
                             }
                         })
                     } else {
                         performUIUpdatesOnMain {
-                            
-                            // Alert: Get initial user info failed
                             showAlert(viewController: self, title: "ERROR", message: error?.localizedDescription, actionTitle: "Dismiss")
                         }
                     }
@@ -78,7 +74,6 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
             } else {
                 performUIUpdatesOnMain {
                     
-                    // Alert:
                     showAlert(viewController: self, title: "ERROR", message: error?.localizedDescription, actionTitle: "Dismiss")
                 }
             }
@@ -87,7 +82,7 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
     
     private func completeLogin() {
         let navigationManagerController = storyboard!.instantiateViewController(withIdentifier: "NavigationManagerController") as! UINavigationController
-        self.present(navigationManagerController, animated: true, completion: nil)
+            self.present(navigationManagerController, animated: true, completion: nil)
     }
     
     
@@ -102,14 +97,12 @@ class LoginViewController: UIViewController, CLLocationManagerDelegate, UITextFi
     }
     
     // MARK: Location Manager Delegate Functions
-    // Get user's coordinates and update Model's properties
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation:CLLocation = locations[0]
         LocationData.sharedInstance.myLocation?.latitude = userLocation.coordinate.latitude
         LocationData.sharedInstance.myLocation?.longitude = userLocation.coordinate.longitude
     }
     
-    // MARK: Text Field Delegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()

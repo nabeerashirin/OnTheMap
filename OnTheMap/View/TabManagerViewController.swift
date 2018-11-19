@@ -10,15 +10,8 @@
 import UIKit
 
 class TabManagerViewController: UITabBarController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    
+
     // MARK: Actions
-    // Launch VC to add a new pin
     @IBAction func addNewPin(_ sender: UIBarButtonItem) {
         
         if LocationData.sharedInstance.locationExists {
@@ -26,28 +19,23 @@ class TabManagerViewController: UITabBarController {
             pinExistsMessage.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             pinExistsMessage.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: {control in
                 let addNewPinNavigationViewController = self.storyboard!.instantiateViewController(withIdentifier: "NavigationPinController") as! UINavigationController
-                self.present(addNewPinNavigationViewController, animated: true, completion: nil)
+                    self.present(addNewPinNavigationViewController, animated: true, completion: nil)
             }))
-            self.present(pinExistsMessage, animated: false, completion: nil)
+                self.present(pinExistsMessage, animated: false, completion: nil)
         } else {
             let addNewPinNavigationViewController = storyboard!.instantiateViewController(withIdentifier: "NavigationPinController") as! UINavigationController
-            self.present(addNewPinNavigationViewController, animated: true, completion: nil)
+                self.present(addNewPinNavigationViewController, animated: true, completion: nil)
         }
     }
     
-    // Refresh button - common for Map and List
-    // TODO: Refresh main data storing array in Model - check that update is applied to Map/List VCs
     @IBAction func refreshStudentLocations(_ sender: UIBarButtonItem) {
         ParseClient.sharedInstance().getAllStudentLocations(completionHandlerForGetAllStudentLocations: {(success, error) in
             if success {
                 performUIUpdatesOnMain {
-                    // Confirm the update with AlertView
-                    showAlert(viewController: self, title: "SUCCESS", message: "Database updated", actionTitle: "Dismiss")
-                    
-                    // Update the table ('list') view
+                    showAlert(viewController: self, title: "SUCCESS", message: "Updated", actionTitle: "Dismiss")
                     TableViewController.sharedInstance().tableView.reloadData()
-                    
-                    // TODO: Refresh map view
+                    //implementation
+
                 }
             } else {
                 performUIUpdatesOnMain {
@@ -86,20 +74,5 @@ class TabManagerViewController: UITabBarController {
                 }
             }
         })
-        /*
-         ParseClient.sharedInstance().deleteSessionID(completionHandlerForDeleteSessionID: {(success, error) in
-         if success {
-         print("ID deleted")
-         performUIUpdatesOnMain {
-         self.dismiss(animated: true, completion: nil)
-         }
-         } else {
-         performUIUpdatesOnMain {
-         showAlert(viewController: self, title: "ERROR", message: error?.description, actionTitle: "Dismiss")
-         }
-         }
-         })
-         
-         */
     }
 }

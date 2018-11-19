@@ -51,7 +51,7 @@ class ParseClient: NSObject {
             
             // data retuned
             guard var Data = data else {
-                Error("Request returned no data")
+                Error("No data was returned")
                 return
             }
             
@@ -101,18 +101,17 @@ class ParseClient: NSObject {
     }
 }
 
-/*
+
 extension ParseClient {
     
     
-    // MARK: Get all Users locations
-    // Get a full list of Student Locations
+    // MARK: Get user locations
+    
     func getAllStudentLocations(completionHandlerForGetAllStudentLocations: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
-        // Extensions for URL: limit & order
+  
         let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: [ParseClient.Constants.ParseAPILimit:String(ParseClient.Constants.LimitLocations), ParseClient.Constants.ParseAPIOrder: "-updatedAt"])
-        //let urlForGetAllStudentLocations = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: nil, parameters: nil)
-        
+   
         let _ = ParseClient.sharedInstance().taskForMethod(ParseClient.MethodTypes.get, withURL: urlForGetAllStudentLocations, httpHeaderFieldValue: ParseClient.JSONHeaderCommon.jsonHeaderCommonParse, httpBody: nil, completionHandlerForTask: {(data, error) in
             
             guard error == nil else {
@@ -130,13 +129,10 @@ extension ParseClient {
                 return
             }
             
-            // Clean the storage array in order to prevent duplications:
             LocationData.sharedInstance.studentLocations = []
-            
-            // 'location' in the next iteration is either a valid location record (dict [String:AnyObject]) or invalid one
+        
             for location in arrayOfLocationDicts {
-                
-                // If failable init succeed then append location to the main array, if not (== nil) just skip
+
                 if let studentLocation = StudentLocation(location) {
                     LocationData.sharedInstance.studentLocations.append(studentLocation)
                 }
@@ -146,7 +142,7 @@ extension ParseClient {
         })
     }
     
-    // MARK: Delete a session ID (log out)
+    // MARK: Logout session
     func deleteSessionID(completionHandlerForDeleteSessionID: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         let urlForDeleteSessionID = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.UdacityApiHost, apiPath: ParseClient.Constants.UdacityApiPath, withExtension: "/session", parameters: [:])
         
@@ -216,7 +212,7 @@ extension ParseClient {
         })
     }
     
-    // MARK: Replace (put) existing location
+    // MARK: Replace location
     func putNewLocation(locationIDToReplace: String, mapString: String, mediaURL: String, latitude:String, longitude: String, completionHandlerForPutNewLocation: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
         let urlForPutNewLocation = ParseClient.sharedInstance().makeURL(apiHost: ParseClient.Constants.ParseApiHost, apiPath: ParseClient.Constants.ParseApiPath, withExtension: "/\(locationIDToReplace)", parameters: nil)
@@ -230,7 +226,7 @@ extension ParseClient {
             
             guard error == nil else {
                 if (error?.description.contains("offline"))! {
-                    completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Internet connection is offline"]))
+                    completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Please check your internet connection"]))
                 } else {
                     completionHandlerForPutNewLocation(false, error)
                 }
@@ -241,9 +237,9 @@ extension ParseClient {
             if let _ = sessionInfo["updatedAt"] {
                 completionHandlerForPutNewLocation(true, nil)
             } else {
-                completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot replace an existing location"]))
+                completionHandlerForPutNewLocation(false, NSError(domain: "putNewLocation", code: 1, userInfo: [NSLocalizedDescriptionKey:"Cannot replace location!"]))
             }
         })
     }
 }
- */
+
